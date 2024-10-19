@@ -1,0 +1,15 @@
+---
+import { getCollection } from "astro:content";
+import { Card } from "@astrojs/starlight/components";
+const tools = await getCollection("tools");
+// const developers = await getCollection("developers");
+---
+
+{
+  tools.map((tool) => (
+    <Card title={tool.data.toolName} icon="seti:info">
+      <a href={tool.data.downloadPage}>Download🔗</a>
+      <p>Catagory: {tool.data.category}</p>
+    </Card>
+  ))
+}

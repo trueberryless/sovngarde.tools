@@ -1,0 +1,19 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ToolPage from "./ToolPage.astro";
+
+const pageTitle = "Modding Tools";
+const allTools = await getCollection("tools");
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <ul>
+    {
+      allTools.map((tools) => (
+        <ToolPage url={`/tools/${tools.id}/`} title={tools.data.toolName} />
+      ))
+    }
+  </ul>
+</BaseLayout>
+
