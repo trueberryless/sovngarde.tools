@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Sovngarde";
+  /* Use a relative path to the local font file in `url()`. */
+  src: url("/fonts/Sovngarde.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.site-title {
+  font-family: "Sovngarde", sans-serif;
+  font-size: var(--sl-text-h2);
+}
+
+/* Make h1s purdy */
+h1 {
+  font-family: "Sovngarde", sans-serif;
+  font-size: 3em;
+  color: var(--sl-color-text-accent);
+}
+/* Adjust titles on the "All posts" page*/
+h2:where(.astro-dr56dw7m) a:where(.astro-dr56dw7m) {
+  font-family: "Sovngarde", sans-serif;
+  font-size: 1.4em;
+  color: var(--sl-color-text-accent);
+}
+
+/* Make links underlined on hover */
+@layer base {
+  a {
+    text-decoration: none;
+    transition: text-decoration 0.3s ease;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
