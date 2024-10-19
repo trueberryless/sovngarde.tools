@@ -1,0 +1,92 @@
+---
+import { markdown } from "@astropub/md";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { URL } from 'url';
+
+// Accept `sourceCodeURL` as a prop
+export interface Props {
+  sourceCodeURL: string;
+}
+
+// Use the 'sourceCodeURL' frontmatter property from the tool release-notes page
+const { sourceCodeURL } = Astro.props;
+const repo = new URL(sourceCodeURL).pathname.slice(1);
+
+// Use ENV variables to fetch the NexusMods API key
+// const NEXUS_API_KEY = process.env.NEXUS_API_KEY;
+// const nexusResponse = await fetch(`https://api.nexusmods.com/v1/games/skyrimspecialedition/mods/6194/files.json?category=main?api_key=${NEXUS_API_KEY}`);
+// const data = await nexusResponse.json();
+
+// Function to fetch the recent releases from each tool's GitHub releases page
+async function fetchReleases() {
+  const githubResponse = await fetch(`https://api.github.com/repos/${repo}/releases`);
+  if (!githubResponse.ok) {
+    throw new Error(`GitHub API responded with ${githubResponse.url}`);
+  }
+  return githubResponse.json();
+}
+
+let releases = [];
+try {
+  releases = await fetchReleases();
+  // console.log("Fetched releases:", releases);
+} catch (error) {
+  // console.error("Failed to fetch releases:", error);
+}
+
+let latestAssigned = false;
+
+function getLabel(release: any, index: any) {
+  if (release.prerelease) {
+    return "Pre-Release";
+  } else if (!latestAssigned || release.make_latest) {
+    latestAssigned = true;
+    return "Latest";
+  } else if (index !== 0) {
+    return "Legacy";
+  } else {
+    return "";
+  }
+}
+---
+
+<BaseLayout>
+  <h2>NexusMods latest release</h2>
+  <p>Coming soon...</p>
+  <h2>GitHub releases</h2>
+  <p>See the five most recent GitHub release in the following sections:</p>
+  <br />
+  {
+    releases.slice(0, 5).map((release: any, index: any) => (
+      <>
+        <a href={release.html_url} class="inline-flex items-center">
+          <h2 class="flex items-center">{release.name || release.tag_name} </h2>
+        </a>
+        <span
+          class="ml-2 inline-block px-2 py-1 text-xs font-semibold text-accent-900 border
+              border-accent-900 rounded bg-accent-200 font-sans"
+        >
+          {getLabel(release, index)}
+        </span>
+        <br />
+        <span class="ml-2 text-sm">
+          {new Date(release.published_at).toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          })}
+        </span>
+        <hr />
+        <div set:html={markdown(release.body)} />
+      </>
+    ))
+  }
+
+  <h2>Historical release notes</h2>
+
+  <p>
+    For the full history of release notes, see the <a href={`${sourceCodeURL}/releases`}
+      >GitHub releases page</a
+    >.
+  </p>
+</BaseLayout>
