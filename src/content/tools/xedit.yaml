@@ -1,0 +1,21 @@
+toolName: xEdit
+category: utility
+sourceCodeURL: https://github.com/TES5Edit/TES5Edit
+nexusModsPage: https://www.nexusmods.com/skyrimspecialedition/mods/164
+nexusModsPath: skyrimspecialedition/mods/164
+discord: https://discord.gg/5t8RnNQ
+developer:
+  - elminsterau
+games:
+  - enderal
+  - enderal-se
+  - fallout-3
+  - fallout-4
+  - fallout-76
+  - fallout-new-vegas
+  - oblivion
+  - skyrim-se
+  - skyrim
+  - starfield
+downloadPage: https://www.nexusmods.com/skyrimspecialedition/mods/164
+logo: "../../assets/missing-image.png"

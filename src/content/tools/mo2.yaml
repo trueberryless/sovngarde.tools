@@ -1,0 +1,22 @@
+toolName: Mod Organizer 2
+category: mod-manager
+sourceCodeURL: https://github.com/ModOrganizer2/modorganizer
+nexusModsPage: https://www.nexusmods.com/skyrimspecialedition/mods/6194
+nexusModsPath: skyrimspecialedition/mods/6194
+discord: https://discord.gg/r7c9atzYRx
+developer:
+  - modorganizer2
+games:
+  - enderal
+  - enderal-se
+  - fallout-3
+  - fallout-4
+  - fallout-76
+  - fallout-new-vegas
+  - oblivion
+  - morrowind
+  - skyrim-se
+  - skyrim
+  - starfield
+downloadPage: https://www.nexusmods.com/skyrimspecialedition/mods/6194
+logo: "../../assets/missing-image.png"
