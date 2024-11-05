@@ -164,6 +164,9 @@ export default defineConfig({
           label: "Italiano",
         },
       },
+      components: {
+          MarkdownContent: "./src/components/MarkdownContent.astro",
+      },
     }),
     tailwind({
       // Disable the default base styles:
